@@ -18,10 +18,10 @@ This skill **only provides recommendations**. It will:
 
 It will **not**:
 
-- Run shell commands (`curl`, `openclaw`, etc.)
+- Run any shell commands
 - Read or write any files on disk
-- Disable or modify cron jobs
-- Access API keys or billing endpoints
+- Disable or modify cron jobs directly
+- Access any API keys, credentials, or billing endpoints
 
 All actions are the user's responsibility.
 
