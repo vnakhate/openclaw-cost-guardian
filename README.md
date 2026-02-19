@@ -2,7 +2,7 @@
 
 # OpenClaw Cost Guardian
 
-A skill for [OpenClaw](https://github.com/openclaw/openclaw) that prevents runaway API costs by enforcing smart defaults on cron schedules, model selection, and polling patterns.
+An advisory skill for [OpenClaw](https://github.com/openclaw/openclaw) that recommends cost-saving defaults for cron schedules, model selection, and polling patterns. **This skill is recommendation-only — it never executes commands or modifies files.**
 
 ## The Problem
 
@@ -10,11 +10,11 @@ OpenClaw's antfarm workflows default to 5-minute polling intervals using your pr
 
 ## What This Skill Does
 
-- **Enforces minimum polling intervals** — blocks cron jobs under 5 minutes, recommends 2-4 hours for daily workflows
-- **Downgrades heartbeat models** — peek/NO_WORK checks use cheapest available model, not Sonnet/Opus
-- **Shows cost estimates** — calculates daily/monthly cost before creating any cron job
+- **Flags expensive polling intervals** — recommends 2-4 hours for daily workflows, flags anything under 5 minutes
+- **Recommends cheaper heartbeat models** — suggests using cheapest available model for peek/NO_WORK checks
+- **Shows cost estimates** — calculates daily/monthly cost before you create any cron job
 - **Budget alerts** — warns at $5/day, critical at $15/day
-- **Auto-disables completed workflow pollers** — stops polling after workflow finishes
+- **Recommends disabling completed workflow pollers** — suggests stopping polling after workflow finishes
 
 ## Install
 
@@ -40,7 +40,7 @@ openclaw gateway restart
 
 ## Usage
 
-The skill activates automatically when you or another skill tries to create cron jobs or workflows. You can also ask OpenClaw directly:
+The skill activates automatically when you or another skill tries to create cron jobs or workflows and provides recommendations. You can also ask OpenClaw directly:
 
 - "Audit my costs"
 - "How much am I spending?"
