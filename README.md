@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 # OpenClaw Cost Guardian
 
 A skill for [OpenClaw](https://github.com/openclaw/openclaw) that prevents runaway API costs by enforcing smart defaults on cron schedules, model selection, and polling patterns.
@@ -43,6 +45,14 @@ The skill activates automatically when you or another skill tries to create cron
 - "Audit my costs"
 - "How much am I spending?"
 - "Review my cron jobs for waste"
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to get involved.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## License
 

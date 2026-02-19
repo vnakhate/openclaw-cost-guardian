@@ -30,11 +30,11 @@ Cron jobs that just check for work (peek/heartbeat) should use the **cheapest av
 
 | Task | Recommended Model |
 |------|------------------|
-| Heartbeat / peek for work | Cheapest fallback (e.g., `openrouter/z-ai/glm-5` or free flash model) |
+| Heartbeat / peek for work | Cheapest available model (e.g., a free or flash-tier model from your provider) |
 | Actual work execution | Primary model is fine |
 | Daily scheduled tasks | Primary model is fine |
 
-**NEVER use Opus or Sonnet for heartbeat polling.** If a cron payload contains "peek", "NO_WORK", or "HEARTBEAT_OK", it MUST use a cheap model.
+**NEVER use expensive models for heartbeat polling.** If a cron payload contains "peek", "NO_WORK", or "HEARTBEAT_OK", it MUST use a cheap model.
 
 ### 3. Cost Estimation — Show Before Creating
 
@@ -53,15 +53,19 @@ Ask for user confirmation if monthly estimate exceeds $5.
 
 ### 4. Budget Alerts
 
-Track cumulative spend via OpenRouter API:
+Track cumulative spend via your LLM provider's usage API. For example:
+
 ```bash
-curl -s https://openrouter.ai/api/v1/auth/key \
-  -H "Authorization: Bearer $OPENROUTER_API_KEY" | python3 -c "
-import json,sys
-d=json.load(sys.stdin)['data']
-print(f'Today: ${d[\"usage_daily\"]:.2f}')
-print(f'This week: ${d[\"usage_weekly\"]:.2f}')
-print(f'This month: ${d[\"usage_monthly\"]:.2f}')
+# Query your provider's usage/billing endpoint
+# Replace with the appropriate API call for your provider
+curl -s <PROVIDER_USAGE_ENDPOINT> \
+  -H "Authorization: Bearer $LLM_API_KEY" | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+# Extract daily/weekly/monthly spend from the response
+print(f'Today: \${data[\"usage_daily\"]:.2f}')
+print(f'This week: \${data[\"usage_weekly\"]:.2f}')
+print(f'This month: \${data[\"usage_monthly\"]:.2f}')
 "
 ```
 
@@ -82,7 +86,7 @@ When installing antfarm workflows:
 
 When user asks to audit costs, run:
 
-1. Check OpenRouter spend (API call above)
+1. Check provider spend (API call above)
 2. List all cron jobs: `openclaw cron list`
 3. Flag any job polling more frequently than its category minimum
 4. Flag any heartbeat job using an expensive model
@@ -94,9 +98,9 @@ When user asks to audit costs, run:
 **User says:** "Set up a cron to check for new emails every minute"
 
 **Cost Guardian response:**
-> Checking every minute with Sonnet 4.6 would cost ~$8-15/day (~$250-450/month).
+> Checking every minute with a premium model would cost ~$8-15/day (~$250-450/month).
 >
-> Recommended: Every 15 minutes with GLM-4.7-Flash (free).
+> Recommended: Every 15 minutes with a free/flash-tier model.
 > That's $0/day and you'll still catch emails within 15 min.
 >
 > Want me to set it up at 15min with the free model?
@@ -104,8 +108,8 @@ When user asks to audit costs, run:
 ## Quick Reference
 
 ```bash
-# Check current spend
-curl -s https://openrouter.ai/api/v1/auth/key -H "Authorization: Bearer $OPENROUTER_API_KEY"
+# Check current spend (replace with your provider's usage endpoint)
+curl -s <PROVIDER_USAGE_ENDPOINT> -H "Authorization: Bearer $LLM_API_KEY"
 
 # List cron jobs
 openclaw cron list
