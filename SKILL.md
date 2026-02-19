@@ -107,4 +107,3 @@ When the user asks to audit costs, suggest they:
 > That's $0/day and you'll still catch emails within 15 min.
 >
 > Would you like to use those settings instead?
-
