@@ -89,8 +89,8 @@ When the user sets up antfarm workflows, recommend:
 
 When the user asks to audit costs, suggest they:
 
-1. Check provider spend via their billing dashboard or API
-2. List all cron jobs: `openclaw cron list`
+1. Check provider spend via their billing dashboard
+2. List all active cron jobs
 3. Flag any job polling more frequently than its category minimum
 4. Flag any heartbeat job using an expensive model
 5. Calculate projected monthly cost
@@ -108,18 +108,3 @@ When the user asks to audit costs, suggest they:
 >
 > Would you like to use those settings instead?
 
-## Quick Reference (for the user)
-
-```bash
-# Check current spend
-# Use your provider's billing dashboard or API
-
-# List cron jobs
-openclaw cron list
-
-# Disable a job
-openclaw cron disable <job-id>
-
-# Update interval (via jobs.json when gateway stopped)
-# Edit ~/.openclaw/cron/jobs.json → everyMs field
-```

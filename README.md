@@ -46,6 +46,21 @@ The skill activates automatically when you or another skill tries to create cron
 - "How much am I spending?"
 - "Review my cron jobs for waste"
 
+## Useful Commands
+
+```bash
+# Check current spend — use your provider's billing dashboard or API
+
+# List cron jobs
+openclaw cron list
+
+# Disable a job
+openclaw cron disable <job-id>
+
+# Update interval (edit when gateway is stopped)
+# ~/.openclaw/cron/jobs.json → everyMs field
+```
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to get involved.
