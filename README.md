@@ -48,7 +48,7 @@ The skill activates automatically when you or another skill tries to create cron
 
 ## Managing Cron Jobs
 
-See the [OpenClaw documentation](https://github.com/openclaw/openclaw) for commands to list, disable, and configure cron jobs.
+Refer to your OpenClaw gateway documentation for commands to list, disable, and configure cron jobs.
 
 ## Contributing
 
